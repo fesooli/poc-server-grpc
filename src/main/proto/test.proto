@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_generic_services = true;
+option java_package = "br.com.dasa.pocgrpc";
+
+package br.com.dasa.pocgrpc;
+
+service ReceiverTestService {
+
+  rpc receive(AvailabilityRequest) returns (AvailabilityResponse) {}
+}
+
+message AvailabilityRequest {
+  Patient patientInfo = 1;
+  repeated Schedule schedule = 2;
+}
+
+message Patient {
+  double weight = 1;
+  double height = 2;
+  string gender = 3;
+  string birthDate = 4;
+}
+
+message Schedule {
+  int32 brandId = 1;
+  string locationId = 2;
+  int32 roomId = 3;
+  repeated string exam = 4;
+  repeated string relatedExam = 5;
+  string relatedExamTime = 6;
+  string healthPlan = 7;
+  string date = 8;
+  string startHour = 9;
+  string endHour = 10;
+}
+
+message ScheduleResponse {
+  int32 brandId = 1;
+  string locationId = 2;
+  int32 roomId = 3;
+  repeated string exam = 4;
+  string startTime = 5;
+  string endTime = 6;
+}
+
+message AvailabilityResponse {
+  repeated ScheduleResponse response = 1;
+}
